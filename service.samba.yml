@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+  x-samba:
+    container_name: x-samba
+    image: dperson/samba
+    restart: always
+    command: >
+      -s "apps;/home/apps;yes;no;yes;all;none;;comment2" -u "example1;badpass"
+      -W
+    environment:
+    - USERID=${UID}
+    volumes:
+    - nginx_logs:/home/apps/nginx_logs
+    - mecash:/home/apps/mecash
+    - mecash_logs:/home/apps/mecash/logs
+    - profiler_mecash:/home/apps/profiler_mecash
+    ports:
+#    - "137:137/udp"
+#    - "138:138/udp"
+    - "139:139/tcp"
+    - "445:445/tcp"
+    networks:
+      default:
+        ipv4_address: 172.18.0.25
+
+volumes:
+  nginx_logs:
+  mecash:
+  mecash_logs:
+  profiler_mecash:
+
+networks:
+  default:
+    external:
+      name: x-network

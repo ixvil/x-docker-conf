@@ -1,0 +1,14 @@
+version: '3.5'
+
+services:
+  mecash-build:
+    container_name: mecash-app
+    image: mecash:latest
+    build:
+      context: './docker/apps/mecash'
+      args:
+        GITLAB_TOKEN: ${GITLAB_TOKEN}
+        UID: ${UID}
+        GID: ${GID}
+        USER: ${USER}
+

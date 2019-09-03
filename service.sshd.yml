@@ -1,0 +1,22 @@
+version: '3.5'
+
+services:
+  cityads-sshd:
+    container_name: c-sshd
+    image: panubo/sshd
+    restart: always
+    environment:
+      SSH_USERS: "app:1000:1000"
+    volumes:
+      - mecash:/var/www/mecash
+      - mecash_logs:/var/www/logs
+      - nginx_logs:/var/log/nginx/
+      - "./.ssh/id_rsa.pub:/etc/authorized_keys/app"
+    ports:
+      - "2222:22/tcp"
+
+volumes:
+  mecash:
+  mecash_logs:
+  nginx_logs:
+

@@ -1,0 +1,8 @@
+version: "3.5"
+
+services:
+  php5.6-fpm-basic-build:
+    image: php5.6-fpm-basic:latest
+    build:
+      context: './docker/basic-images/php5.6-fpm-basic'
+
